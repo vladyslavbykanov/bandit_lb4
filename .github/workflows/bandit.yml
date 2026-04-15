@@ -11,22 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install Bandit
-        run: pip install bandit
+      - run: pip install bandit
 
-      - name: Run Bandit
-        run: bandit -r . -f json -o bandit-report.json || true
+      - run: bandit -r . -f json -o bandit-report.json || true
 
-      - name: Upload Bandit report
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: bandit-report
           path: bandit-report.json
